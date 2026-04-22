@@ -1,10 +1,11 @@
 package com.example.tcpclientserverquiz;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.util.concurrent.BlockingDeque;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -13,24 +14,31 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class QuizServer {
     private ServerController guiController;
-    private HashMap<String, String> questionsAndAnswers;
+    private Map<String, String> questionsAndAnswers = new LinkedHashMap<>();
     private BlockingQueue<AnswerPackage> queue = new LinkedBlockingQueue<>();
 
     QuizServer(ServerController guiController) {
         this.guiController = guiController;
     }
 
-    /**
-     * Starts the quiz server on a background daemon thread.
-     * * This method creates an infinite loop listening for incoming TCP connections
-     * on port 5050. It runs on a separate thread to prevent blocking the main
-     * JavaFX Application Thread. When a client connects, it safely delegates
-     * UI updates (like logging) back to the GUI controller.
-     */
+    public void loadQuestions (String fileName) {
+        File questionsAndAnswersFile = new File(fileName);
+         try (Scanner myReader = new Scanner(questionsAndAnswersFile)) {
+            while (myReader.hasNextLine()) {
+                String line = myReader.nextLine();
+                String[] parts = line.split("\\|");
+                questionsAndAnswers.put(parts[0], parts[1]);
+            }
+            System.out.println("Questions and Answers successfully loaded from " + fileName);
+         } catch (FileNotFoundException e) {
+             System.err.println("File" + fileName + " not found.");
+         }
+    }
+
     public void startServer() {
         // Create the workers
         AnswerProducer producer = new AnswerProducer(queue, 5050);
-        AnswerConsumer consumer = new AnswerConsumer(queue, guiController);
+        AnswerConsumer consumer = new AnswerConsumer(queue, guiController, questionsAndAnswers);
 
         // Run them in separate threads
         Thread producerThread = new Thread(producer);
