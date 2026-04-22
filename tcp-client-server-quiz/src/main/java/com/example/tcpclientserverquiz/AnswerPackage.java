@@ -1,7 +1,9 @@
 package com.example.tcpclientserverquiz;
 
 /**
- * Data model representing a single answer from a client.
+ * Data Transfer Object (DTO) representing a single player's answer.
+ * Encapsulates the player's nickname and their submitted answer text.
+ * Used to safely pass data between the Producer and Consumer threads.
  */
 public class AnswerPackage {
     private String nickname;
@@ -16,7 +18,7 @@ public class AnswerPackage {
         return nickname;
     }
 
-    public String getAnswer() {
+    public String getAnswerText() {
         return answerText;
     }
 

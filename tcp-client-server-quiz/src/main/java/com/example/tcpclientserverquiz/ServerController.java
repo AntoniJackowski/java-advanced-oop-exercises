@@ -15,7 +15,6 @@ public class ServerController {
     @FXML
     public void initialize() {
         QuizServer server = new QuizServer(this);
-        server.loadQuestions("questions.txt");
         server.startServer();
     }
 }

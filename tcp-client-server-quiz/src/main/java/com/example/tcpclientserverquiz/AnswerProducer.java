@@ -7,7 +7,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
-
+/**
+ * Background worker responsible for handling incoming network connections.
+ * It acts as the Producer in the Producer-Consumer pattern.
+ * This thread listens on a specified TCP port, reads raw strings from clients,
+ * parses them into AnswerPackage objects, and safely puts them into a blocking queue.
+ * Note: This class does NOT evaluate whether an answer is correct.
+ */
 public class AnswerProducer implements Runnable {
     private BlockingQueue<AnswerPackage> queue;
     private int port;
