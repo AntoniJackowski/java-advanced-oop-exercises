@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientController {
@@ -21,7 +22,9 @@ public class ClientController {
     private void sendAnswer() {
         try {
             Socket socket = new Socket("127.0.0.1", 5050);
-            System.out.println("Connection attempt successful!");
+            String message = this.clientNick.getText() + "|" + this.clientAnswer.getText();
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(message);
         } catch (IOException e) {
             System.err.println("Failed to send answer to server");
         }

@@ -9,13 +9,12 @@ public class ServerController {
     private TextArea serverTextArea;
 
     public void writeLog(String log) {
-        serverTextArea.appendText(log);
+        serverTextArea.appendText(log + "\n");
     }
 
     @FXML
     public void initialize() {
         QuizServer server = new QuizServer(this);
-
         server.startServer();
     }
 }
