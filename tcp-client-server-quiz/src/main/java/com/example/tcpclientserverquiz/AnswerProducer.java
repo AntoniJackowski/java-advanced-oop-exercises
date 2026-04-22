@@ -28,13 +28,16 @@ public class AnswerProducer implements Runnable {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
                 Socket socket = serverSocket.accept();
+
+                String ipAddress = socket.getInetAddress().getHostAddress();
+
                 BufferedReader reader =
                         new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String rawData = reader.readLine();  // Format: Nick|Answer
                 if (rawData != null && rawData.contains("|")) {
                     String[] parts = rawData.split("\\|");
-                    AnswerPackage answer = new AnswerPackage(parts[0], parts[1]);
+                    AnswerPackage answer = new AnswerPackage(parts[0], parts[1], ipAddress);
 
                     // Put it into the queue for the consumer
                     queue.put(answer);

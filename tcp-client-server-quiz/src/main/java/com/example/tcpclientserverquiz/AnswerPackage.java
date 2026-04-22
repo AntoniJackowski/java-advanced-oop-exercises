@@ -8,10 +8,12 @@ package com.example.tcpclientserverquiz;
 public class AnswerPackage {
     private String nickname;
     private String answerText;
+    private String ipAddress;
 
-    public AnswerPackage(String nickname, String answerText) {
+    public AnswerPackage(String nickname, String answerText, String ipAddress) {
         this.nickname = nickname;
         this.answerText = answerText;
+        this.ipAddress = ipAddress;
     }
 
     public String getNickname() {
@@ -22,8 +24,12 @@ public class AnswerPackage {
         return answerText;
     }
 
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
     @Override
     public String toString() {
-        return nickname + ": " + answerText;
+        return nickname + " (" + ipAddress + ") " + answerText;
     }
 }

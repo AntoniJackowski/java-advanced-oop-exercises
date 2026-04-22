@@ -55,7 +55,7 @@ public class AnswerConsumer implements Runnable {
 
                 if (answerText.trim().equalsIgnoreCase(currentAnswer.trim())) {
 
-                    final String successMsg = nick + " answered correctly!";
+                    final String successMsg = nick + " (" + incomingAnswer.getIpAddress() + ") " + "answered correctly!";
                     Platform.runLater(() -> guiController.writeLog(successMsg));
 
                     queue.clear();
