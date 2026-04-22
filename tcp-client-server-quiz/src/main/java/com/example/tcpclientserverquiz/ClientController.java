@@ -1,14 +1,30 @@
 package com.example.tcpclientserverquiz;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+
+import java.io.IOException;
+import java.net.Socket;
 
 public class ClientController {
     @FXML
-    private Label welcomeText;
+    private TextField clientNick;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TextField clientAnswer;
+
+    @FXML
+    private Button sendBtn;
+
+    @FXML
+    private void sendAnswer() {
+        try {
+            Socket socket = new Socket("127.0.0.1", 5050);
+            System.out.println("Connection attempt successful!");
+        } catch (IOException e) {
+            System.err.println("Failed to send answer to server");
+        }
     }
+
 }
