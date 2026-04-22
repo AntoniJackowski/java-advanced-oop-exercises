@@ -1,11 +1,9 @@
 # java-advanced-oop-exercises
-Place for my university projects related with object-oriented programming in Java.
-
----
+> Place for my university projects related with object-oriented programming in Java.
 
 ## Projects List
 
-### 1. TCP Client-Server Quiz (`tcp-client-server-quiz`)
+### TCP Client-Server Quiz (`tcp-client-server-quiz`)
 A real-time, local network quiz game built using a client-server architecture. 
 
 **Key Technologies & Concepts:**
@@ -19,5 +17,5 @@ The server loads a set of questions from a text file and hosts the game. Multipl
 
 ---
 
-### 2. [Next Project Name]
+### [Next Project Name]
 *(Short description will be added here once the project is finished)*
