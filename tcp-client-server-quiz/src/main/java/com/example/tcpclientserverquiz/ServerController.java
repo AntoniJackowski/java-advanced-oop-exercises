@@ -1,14 +1,21 @@
 package com.example.tcpclientserverquiz;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class ServerController {
-    @FXML
-    private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private TextArea serverTextArea;
+
+    public void writeLog(String log) {
+        serverTextArea.appendText(log);
+    }
+
+    @FXML
+    public void initialize() {
+        QuizServer server = new QuizServer(this);
+
+        server.startServer();
     }
 }

@@ -3,4 +3,4 @@
 <?import javafx.scene.control.TextArea?>
 
 
-<TextArea editable="false" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" />
+<TextArea fx:id="serverTextArea" editable="false" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tcpclientserverquiz.ServerController" />

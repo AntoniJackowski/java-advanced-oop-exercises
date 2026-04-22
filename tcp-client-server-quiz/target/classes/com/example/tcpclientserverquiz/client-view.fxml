@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="180.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane alignment="CENTER" minHeight="70.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
@@ -49,7 +49,7 @@
          <children>
             <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Send" HBox.hgrow="ALWAYS">
                 <graphic>
-                    <FontIcon iconLiteral="fas-paper-plane" iconColor="white" iconSize="16"/>
+                    <FontIcon iconColor="white" iconLiteral="fas-paper-plane" iconSize="16" />
                 </graphic>
                <styleClass>
                   <String fx:value="btn" />
