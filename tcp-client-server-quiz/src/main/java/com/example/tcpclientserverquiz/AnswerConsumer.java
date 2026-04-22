@@ -7,14 +7,11 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Background worker responsible for the core game logic.
- * It acts as the Consumer in the Producer-Consumer pattern.
- * Continuously polls the blocking queue for new AnswerPackage objects.
- * Validates the received answers against the currently active question,
- * clears the queue upon a correct answer, and safely delegates all UI
- * updates to the JavaFX Application Thread via Platform.runLater().
+ * Consumer thread that validates incoming answers against the current question.
+ * Updates the JavaFX UI and manages the game state.
  */
 public class AnswerConsumer implements Runnable {
+
     private BlockingQueue<AnswerPackage> queue;
     private ServerController guiController;
     private Map<String, String> questionsAndAnswers;
@@ -29,7 +26,7 @@ public class AnswerConsumer implements Runnable {
         this.questionsAndAnswers = questionsAndAnswers;
     }
 
-    @ Override
+    @Override
     public void run() {
         try {
             Iterator<Map.Entry<String, String>> iterator = questionsAndAnswers.entrySet().iterator();
@@ -47,17 +44,20 @@ public class AnswerConsumer implements Runnable {
             final String firstQ = "Nr " + questionNumber + ") " + currentQuestion;
             Platform.runLater(() -> guiController.writeLog(firstQ));
 
+            // Main consumer loop
             while (true) {
                 AnswerPackage incomingAnswer = queue.take();
 
                 String nick = incomingAnswer.getNickname();
                 String answerText = incomingAnswer.getAnswerText();
 
+                // Validate answer (case-insensitive and ignoring spaces)
                 if (answerText.trim().equalsIgnoreCase(currentAnswer.trim())) {
 
                     final String successMsg = nick + " (" + incomingAnswer.getIpAddress() + ") " + "answered correctly!";
                     Platform.runLater(() -> guiController.writeLog(successMsg));
 
+                    // Crucial: clear late answers for the already solved question
                     queue.clear();
 
                     if (iterator.hasNext()) {

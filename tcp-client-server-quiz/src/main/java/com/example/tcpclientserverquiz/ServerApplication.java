@@ -7,6 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Entry point for the Quiz Server application.
+ * Initializes and displays the main JavaFX window based on the FXML layout.
+ */
 public class ServerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Controller for the Client application GUI.
+ * Handles user input and sends the player's nickname and answer
+ * over a TCP connection to the server when the send button is clicked.
+ */
 public class ClientController {
     @FXML
     private TextField clientNick;

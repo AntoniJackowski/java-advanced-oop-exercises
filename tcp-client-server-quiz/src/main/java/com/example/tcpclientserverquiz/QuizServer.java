@@ -4,15 +4,12 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Main orchestrator for the Quiz Server infrastructure.
- * Responsible for loading the question database from a file, initializing
- * the shared BlockingQueue, and starting both the network listener (Producer)
- * and the game logic processor (Consumer) on background daemon threads.
+ * Main orchestrator for the Quiz Server.
+ * Loads questions from a file and starts the Producer (network) and Consumer (logic) threads.
  */
 public class QuizServer {
     private ServerController guiController;
@@ -24,12 +21,12 @@ public class QuizServer {
     }
 
     /**
-     * Reads questions and answers from given file (Format: question?|answer).
-     * Puts them in HashMap 'questionsAndAnswers'.
+     * Loads questions and answers from a text file into the map.
+     * Expected message format: question|answer.
      *
-     * @param fileName  file name (e.g. questions.txt) located in directory 'resources'
+     * @param fileName The name of the file located in the 'resources' directory.
      */
-    private void loadQuestions (String fileName) {
+    private void loadQuestions(String fileName) {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         try (InputStream is = loader.getResourceAsStream(fileName)) {
             if (is == null) {
@@ -54,6 +51,9 @@ public class QuizServer {
         }
     }
 
+    /**
+     * Initializes the server by loading data and starting the background worker threads.
+     */
     public void startServer() {
         loadQuestions("questions.txt");
 

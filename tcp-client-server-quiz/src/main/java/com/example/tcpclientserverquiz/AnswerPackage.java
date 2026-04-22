@@ -2,7 +2,7 @@ package com.example.tcpclientserverquiz;
 
 /**
  * Data Transfer Object (DTO) representing a single player's answer.
- * Encapsulates the player's nickname and their submitted answer text.
+ * Encapsulates the player's nickname, their submitted answer text, and IP address.
  * Used to safely pass data between the Producer and Consumer threads.
  */
 public class AnswerPackage {

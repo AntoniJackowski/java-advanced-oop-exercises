@@ -8,13 +8,11 @@ import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Background worker responsible for handling incoming network connections.
- * It acts as the Producer in the Producer-Consumer pattern.
- * This thread listens on a specified TCP port, reads raw strings from clients,
- * parses them into AnswerPackage objects, and safely puts them into a blocking queue.
- * Note: This class does NOT evaluate whether an answer is correct.
+ * Producer thread that listens for client connections on a given TCP port,
+ * reads incoming answers, and places them into the shared blocking queue.
  */
 public class AnswerProducer implements Runnable {
+
     private BlockingQueue<AnswerPackage> queue;
     private int port;
 
@@ -35,11 +33,11 @@ public class AnswerProducer implements Runnable {
                         new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 String rawData = reader.readLine();  // Format: Nick|Answer
+
                 if (rawData != null && rawData.contains("|")) {
                     String[] parts = rawData.split("\\|");
                     AnswerPackage answer = new AnswerPackage(parts[0], parts[1], ipAddress);
 
-                    // Put it into the queue for the consumer
                     queue.put(answer);
                 }
                 socket.close();

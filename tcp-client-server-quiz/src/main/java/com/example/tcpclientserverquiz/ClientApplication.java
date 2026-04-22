@@ -8,6 +8,10 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 
 import java.io.IOException;
 
+/**
+ * Entry point for the Quiz Client application.
+ * Initializes and displays the JavaFX user interface.
+ */
 public class ClientApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
